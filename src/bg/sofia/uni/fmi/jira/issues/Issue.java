@@ -7,43 +7,117 @@ import bg.sofia.uni.fmi.jira.User;
 import bg.sofia.uni.fmi.jira.enums.IssuePriority;
 import bg.sofia.uni.fmi.jira.enums.IssueResolution;
 import bg.sofia.uni.fmi.jira.enums.IssueStatus;
+import bg.sofia.uni.fmi.jira.enums.IssueType;
 
 import java.time.LocalDateTime;
 
 public class Issue implements IIssue {
-    
-    public Issue(IssuePriority priority, Component component, User reporter, String description) throws InvalidReporterException {
-        
+
+    private IssuePriority prio;
+    private IssueResolution resolution = IssueResolution.UNRESOLVED;
+    private IssueStatus status = IssueStatus.OPEN;
+    private String description;
+    private Component comp;
+    private User userReporter;
+    private LocalDateTime createdAt;
+    private LocalDateTime lastModification;
+    private IssueType type;
+
+    public Issue(IssuePriority priority, Component component, User reporter, String description)
+            throws InvalidReporterException {
+        setPrio(priority);
+        setComponent(component);
+        setUserReporter(reporter);
+        if ( validateDescription(description)) {
+            setDescription(description);
+        }
+        resolve(resolution);
+        setStatus(status); 
+        setCreatedAt();
+        setLastModification(createdAt);
+    }
+
+
+    public void setPrio(IssuePriority priority) {
+        this.prio = priority;
+    }
+
+    public IssuePriority getPrio() {
+        return prio;
+    }
+
+    public void setComponent(Component component) {
+        this.comp = component;
+    }
+
+    public Component getComponent() {
+        return comp;
+    }
+
+    private void setUserReporter(User reporter) {
+        this.userReporter = reporter;
+    }
+
+    public User getUserReporter() {
+        return this.userReporter;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    private boolean validateDescription(String description){
+        return (description != null);
     }
 
     @Override
     public void resolve(IssueResolution resolution) {
-        // TODO Auto-generated method stub
-        
+        if (resolution.equals(IssueResolution.values())) {
+            this.resolution = resolution;
+        }
     }
-
+    public IssueResolution getResolution(){
+        return this.resolution;
+    }
+    public IssueStatus getStatus() {
+        return this.status;
+    }
     @Override
     public void setStatus(IssueStatus status) {
-        // TODO Auto-generated method stub
-        
+        if (status.equals(IssueStatus.values())) {
+            this.status = status;
+        }
     }
 
     @Override
     public String getId() {
-        // TODO Auto-generated method stub
-        return null;
+        return comp.getUnID();
     }
 
+    private void setCreatedAt() {
+        createdAt = LocalDateTime.now();
+    }
     @Override
     public LocalDateTime getCreatedAt() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.createdAt;
     }
 
     @Override
     public LocalDateTime getLastModifiedAt() {
-        // TODO Auto-generated method stub
-        return null;
+        return lastModification;
     }
 
+    public void setLastModification(LocalDateTime lastModification) {
+        this.lastModification = lastModification;
+    }
+    
+    public IssueType getType(){
+        return this.type;
+    }
+    public void setType(IssueType type) {
+        this.type = type;
+    }
 }
