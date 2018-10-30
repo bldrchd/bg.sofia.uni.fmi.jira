@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 
 public class Issue implements IIssue {
 
-    private IssuePriority prio;
+    private IssuePriority prio = null;
     private IssueResolution resolution = IssueResolution.UNRESOLVED;
     private IssueStatus status = IssueStatus.OPEN;
-    private String description;
-    private Component comp;
-    private User userReporter;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastModification;
-    private IssueType type;
+    private String description = null;
+    private Component comp = null;
+    private User userReporter = null;
+    private LocalDateTime createdAt = null;
+    private LocalDateTime lastModification = null;
+    private IssueType type = null;
 
     public Issue(IssuePriority priority, Component component, User reporter, String description)
             throws InvalidReporterException {

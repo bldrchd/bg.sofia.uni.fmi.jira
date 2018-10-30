@@ -4,7 +4,7 @@ import bg.sofia.uni.fmi.jira.issues.exceptions.InvalidReporterException;
 
 public class User {
 
-    private String userName;
+    private String userName = null;
 
     public User(String name) throws InvalidReporterException {
         try {
@@ -25,7 +25,7 @@ public class User {
     }
 
     private boolean validateUserName(String name) throws InvalidReporterException {
-        if (name.matches("[A-Z0-9]+") && name != null) {
+        if (name != null) {
             return true;
         } else
             throw new InvalidReporterException("Invalid User Reporter");

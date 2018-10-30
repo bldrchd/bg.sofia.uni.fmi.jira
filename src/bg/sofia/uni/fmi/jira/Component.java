@@ -4,20 +4,21 @@ import bg.sofia.uni.fmi.jira.issues.exceptions.InvalidComponentException;
 
 public class Component {
 
-    private String UnID;
+    private String UnID = null;
     private long IDnumber = 0;
-    private String name;
-    private String shortName;
-    private User creator;
+    private String name = null;
+    private String shortName = null;
+    private User creator = null;
 
     public Component(String name, String shortName, User creator) {
-        try {
-        setUnID(createUnID(shortName));
+      //  try {
         setName(name);
+        setShortName(shortName);
         setCreator(creator);
-        } catch (InvalidComponentException ice) {
+        this.UnID = createUnID(shortName);
+/*        } catch (InvalidComponentException ice) {
             ice.getMessage();
-        }
+        }*/
     }
 
     private String createUnID(String shortName) {
@@ -29,13 +30,13 @@ public class Component {
         return this.UnID;
     }
 
-    public void setUnID(String unID) throws InvalidComponentException {
+/*    public String setUnID(String unID) throws InvalidComponentException {
         if (unID.matches("[A-Z\\-0-9]+")) {
-            this.UnID = unID;
+            return this.UnID = unID;
         } else {
             throw new InvalidComponentException("Invalid Component "+unID);
         }
-    }
+    }*/
 
     public String getName() {
         return name;

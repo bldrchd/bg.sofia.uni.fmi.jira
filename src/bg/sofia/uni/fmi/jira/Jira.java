@@ -17,12 +17,13 @@ public class Jira implements IssueTracker {
     public Jira(Issue[] issues) {
         this.issues = issues;
     }
+    //TODO - rewrite w/ for:L
 
     @Override
     public Issue[] findAll(Component component, IssueStatus status) {
         for (int i = 0; i <= issues.length; i++) {
             int j = 0;
-            if (issues[i].getComponent().equals(component) && (issues[i].getStatus().equals(status))) {
+            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getStatus().equals(status))) {
                 results[j] = issues[i];
                 j++;
             }
@@ -34,7 +35,7 @@ public class Jira implements IssueTracker {
     public Issue[] findAll(Component component, IssuePriority priority) {
         for (int i = 0; i <= issues.length; i++) {
             int j = 0;
-            if (issues[i].getComponent().equals(component) && (issues[i].getStatus().equals(priority))) {
+            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getStatus().equals(priority))) {
                 results[j] = issues[i];
                 j++;
             }
@@ -46,7 +47,7 @@ public class Jira implements IssueTracker {
     public Issue[] findAll(Component component, IssueType type) {
         for (int i = 0; i <= issues.length; i++) {
             int j = 0;
-            if (issues[i].getComponent().equals(component) && (issues[i].getType().equals(type))) {
+            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getType().equals(type))) {
                 results[j] = issues[i];
                 j++;
             }
@@ -58,7 +59,7 @@ public class Jira implements IssueTracker {
     public Issue[] findAll(Component component, IssueResolution resolution) {
         for (int i = 0; i <= issues.length; i++) {
             int j = 0;
-            if (issues[i].getComponent().equals(component) && (issues[i].getResolution().equals(resolution))) {
+            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getResolution().equals(resolution))) {
                 results[j] = issues[i];
                 j++;
             }
