@@ -15,7 +15,7 @@ public class Jira implements IssueTracker {
     Issue[] results;
 
     public Jira(Issue[] issues) {
-
+        this.issues = issues;
     }
 
     @Override
@@ -26,9 +26,8 @@ public class Jira implements IssueTracker {
                 results[j] = issues[i];
                 j++;
             }
-            return results;
         }
-        return null;
+        return results;
     }
 
     @Override
@@ -39,10 +38,8 @@ public class Jira implements IssueTracker {
                 results[j] = issues[i];
                 j++;
             }
-            return results;
         }
-
-        return null;
+        return results;
     }
 
     @Override
@@ -53,26 +50,44 @@ public class Jira implements IssueTracker {
                 results[j] = issues[i];
                 j++;
             }
-            return results;
         }
-        return null;
+        return results;
     }
 
     @Override
     public Issue[] findAll(Component component, IssueResolution resolution) {
-        return null;
-
+        for (int i = 0; i <= issues.length; i++) {
+            int j = 0;
+            if (issues[i].getComponent().equals(component) && (issues[i].getResolution().equals(resolution))) {
+                results[j] = issues[i];
+                j++;
+            }
+        }
+        return results;
     }
 
     @Override
     public Issue[] findAllIssuesCreatedBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        // TODO Auto-generated method stub
-        return null;
+        for (int i = 0; i <= issues.length; i++) {
+            int j = 0;
+            if (issues[i].getCreatedAt().equals(startTime) && (issues[i].getLastModifiedAt().equals(endTime))) {
+                results[j] = issues[i];
+                j++;
+            }
+        }
+        return results;
+
     }
 
     @Override
     public Issue[] findAllBefore(LocalDateTime dueTime) {
-        // TODO Auto-generated method stub
-        return null;
+        for (int i = 0; i <= issues.length; i++) {
+            int j = 0;
+            if (issues[i].getLastModifiedAt().isAfter(dueTime)) {
+                results[j] = issues[i];
+                j++;
+            }
+        }
+        return results;
     }
 }
