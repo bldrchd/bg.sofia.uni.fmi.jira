@@ -1,6 +1,6 @@
 package bg.sofia.uni.fmi.jira;
 
-import bg.sofia.uni.fmi.jira.issues.exceptions.InvalidComponentException;
+//import bg.sofia.uni.fmi.jira.issues.exceptions.InvalidComponentException;
 
 public class Component {
 

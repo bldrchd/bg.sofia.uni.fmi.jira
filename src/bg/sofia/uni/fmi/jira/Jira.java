@@ -11,69 +11,74 @@ import bg.sofia.uni.fmi.jira.issues.Issue;
 
 public class Jira implements IssueTracker {
 
-    Issue[] issues;
-    Issue[] results;
+    private Issue[] issues;
+    private Issue[] results = null;
+    private int i = 0;
 
     public Jira(Issue[] issues) {
         this.issues = issues;
     }
-    //TODO - rewrite w/ for:L
 
     @Override
     public Issue[] findAll(Component component, IssueStatus status) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getStatus().equals(status))) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getComponent().getName().equals(component.getName()) && (issue.getStatus().equals(status))) {
+                results[i] = issue;
+                i++;
             }
         }
+        i=0;
         return results;
     }
 
     @Override
     public Issue[] findAll(Component component, IssuePriority priority) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getStatus().equals(priority))) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getComponent().getName().equals(component.getName()) && (issue.getStatus().equals(priority))) {
+                results[i] = issue;
+                i++;
             }
         }
+        i=0;
         return results;
     }
 
     @Override
     public Issue[] findAll(Component component, IssueType type) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getType().equals(type))) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getComponent().getName().equals(component.getName()) && (issue.getType().equals(type))) {
+                results[i] = issue;
+                i++;
             }
         }
+        i=0;
         return results;
     }
 
     @Override
     public Issue[] findAll(Component component, IssueResolution resolution) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getComponent().getName().equals(component.getName()) && (issues[i].getResolution().equals(resolution))) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getComponent().getName().equals(component.getName())
+                    && (issue.getResolution().equals(resolution))) {
+                results[i] = issue;
+                i++;
             }
         }
+        i=0;
         return results;
     }
 
     @Override
     public Issue[] findAllIssuesCreatedBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getCreatedAt().equals(startTime) && (issues[i].getLastModifiedAt().equals(endTime))) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getCreatedAt().equals(startTime) && (issue.getLastModifiedAt().equals(endTime))) {
+                results[i] = issue;
+                i++;
             }
         }
         return results;
@@ -82,13 +87,14 @@ public class Jira implements IssueTracker {
 
     @Override
     public Issue[] findAllBefore(LocalDateTime dueTime) {
-        for (int i = 0; i <= issues.length; i++) {
-            int j = 0;
-            if (issues[i].getLastModifiedAt().isAfter(dueTime)) {
-                results[j] = issues[i];
-                j++;
+        results = new Issue[issues.length];
+        for (Issue issue : issues) {
+            if (issue.getLastModifiedAt().isAfter(dueTime)) {
+                results[i] = issue;
+                i++;
             }
         }
+        i=0;
         return results;
     }
 }
